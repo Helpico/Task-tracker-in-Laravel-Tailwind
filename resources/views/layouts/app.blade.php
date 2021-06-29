@@ -18,7 +18,7 @@
 </head>
 <body class="bg-gray-100 h-screen antialiased leading-none font-sans">
     <div id="app">
-        <header class="bg-blue-900 py-6">
+        <header class="bg-indigo-600 py-6">
             <div class="container mx-auto flex justify-between items-center px-6">
                 <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
                     <a href="{{ url('/') }}" class="text-lg font-semibold text-gray-100 no-underline">
