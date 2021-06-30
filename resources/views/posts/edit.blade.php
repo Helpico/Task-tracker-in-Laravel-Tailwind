@@ -34,7 +34,7 @@
                     <div class="flex flex-wrap">
                       
                       <button type="submit" 
-                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-800 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                         <span class="absolute left-0 inset-y-0 flex items-center pl-3">
                             <!-- Heroicon name: solid/lock-closed -->
                             <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
@@ -48,8 +48,8 @@
                         <p class="w-full text-xs text-center text-gray-700 my-6 sm:text-sm sm:my-8">
                             {{ __("Return back to ") }}
                             <a class="text-blue-500 hover:text-blue-700 no-underline hover:underline" href="{{ route('posts') }}">
-                                {{ __('the List of Tasks') }} ? 
-                            </a>
+                                {{ __('the List of Tasks') }}  
+                            </a>?
                         </p>
                         @endif
                     </div>

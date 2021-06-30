@@ -16,23 +16,20 @@ use App\Http\Controllers\PostDoneController;
 |
 */
 
-Route::get('/user', function(){
-  return view('user');
-});
-
 Route::redirect('/', '/login');
 
 Auth::routes();
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
+// Route resource of all Tasks
 Route::get('/posts',[PostController::class, 'index'])->name('posts');
 Route::post('/posts', [PostController::class, 'store']);
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 
+// Status of the Tasks
 Route::post('/posts/{post}/dones', [PostDoneController::class, 'store'])->name('posts.dones');
 Route::delete('/posts/{post}/dones', [PostDoneController::class, 'destroy'])->name('posts.dones');
 
 
-Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');

@@ -11,7 +11,7 @@
           <label for="body" class="sr-only">Body</label>
           <textarea name="body" id="body" cols="30" rows="2" class="bg-gray-100
             border-2 w-full p-4 rounded-lg @error('body') border-red-500 @enderror"
-            placeholder="Post something!"></textarea>
+            placeholder="Task your day!"></textarea>
            
             @error('body')
               <div class="text-red-500 mt-2 text-sm">
@@ -38,10 +38,10 @@
                     </span>                
                   </div>
                   <div class="ml-10">
-                    <div class="text-sm font-medium text-gray-900">
+                    <div class="text-sm text-gray-500">
                     {{ $post->user->name }}  <span class="text-xs text-gray-400">{{ $post->created_at->diffForHumans() }}</span>
                     </div>
-                    <p class="text-sm text-gray-500">{{ $post->body }}</p>
+                    <p class="text-sm font-medium text-gray-900">{{ $post->body }}</p>
 
                     @can('delete', $post)
                     <div class="flex items-center">
