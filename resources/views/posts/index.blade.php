@@ -2,7 +2,8 @@
 
 @section('content')
   <div class="flex justify-center">
-    <div class="w-8/12 bg-white p-6 rounded-lg">
+    <div class=" bg-white p-6 rounded-lg">
+    <!-- w-1/12 -->
      @auth
       <form action="{{ route('posts') }}" method="POST" class="mb-6">
         @csrf
@@ -19,7 +20,7 @@
             @enderror
         </div>
         <div>
-          <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded font-medium">
+          <button type="submit" class="bg-gray-800 text-white px-4 py-2 rounded font-medium">
             Post
           </button>
         </div>
@@ -38,31 +39,49 @@
                   </div>
                   <div class="ml-10">
                     <div class="text-sm font-medium text-gray-900">
-                    {{ $post->user->name }}
+                    {{ $post->user->name }}  <span class="text-xs text-gray-400">{{ $post->created_at->diffForHumans() }}</span>
                     </div>
-                    <p class="text-sm text-gray-500">
-                      {{ $post->body }}
-                    </p>
+                    <p class="text-sm text-gray-500">{{ $post->body }}</p>
+
+                    @can('delete', $post)
+                    <div class="flex items-center">
+                    <div class="text-xs">
+                      <form action="{{ route('posts.destroy', $post) }}" method="post">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="text-blue-500">Delete </button>
+                      </form>
+                    </div> |
+                    <div class="text-xs">
+                      <form action="{{ route('posts.edit', $post) }}" method="get">
+                          @csrf
+                          <button type="submit" class="text-blue-500"> Update</button>
+                      </form>
+                    </div>
+                    </div>
+                    @endcan
 
                     <div class="flex items-center">
-                      <form action="" method="post" class="mr-1">
-                          @csrf
-                        <button type="submit" class="text-green-500 text-sm">Done</button>
-                      </form>
-                      <form action="" method="post" class="mr-1">
-                          @csrf
-                          <button type="submit" class="text-red-500 text-sm">Undone</button>
-                      </form>
+                      @auth
+                        @if (!$post->doneBy(auth()->user()))
+                          <form action="{{ route('posts.dones', $post) }}" method="post" class="mr-1">
+                              @csrf
+                            <button type="submit" class="text-green-500 text-sm">Completed</button>
+                          </form>
+                        @else
+                          <form action="{{ route('posts.dones', $post) }}" method="post" class="mr-1">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="text-red-500 text-sm">In progress</button>
+                          </form>
+                          
+                        @endif
+                      @endauth
+                    <!--  <span class="text-xs text-gray-600">{{ $post->dones->count() }} {{ Str::plural('like', $post->dones->count()) }}</span> -->
+                    
                     </div>
                   </div>
           </div>
-
-          <!-- <div class="mb-4">
-          
-            <a href="#" class="font-bold">{{ $post->user->name }}</a>
-            <span class="text-gray-600 text-sm">{{ $post->created_at }}</span>
-            <p class="mb-2">{{ $post->body }}</p>
-          </div> -->
         @endforeach
         {{ $posts->links() }}
       @else

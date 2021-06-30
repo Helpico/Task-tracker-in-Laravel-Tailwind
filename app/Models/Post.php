@@ -13,9 +13,20 @@ class Post extends Model
         'body'
     ];
 
+    // Checks if a particular user is among this collection
+    public function doneBy(User $user) 
+    {
+        return $this->dones->contains('user_id', $user->id);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    
+    public function dones()
+    {
+        return $this->hasMany(Done::class);
     }
 
 }

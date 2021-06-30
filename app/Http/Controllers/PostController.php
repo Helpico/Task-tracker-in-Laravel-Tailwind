@@ -25,7 +25,8 @@ class PostController extends Controller
     public function index()
     {
        
-        $posts = Post::orderBy('created_at', 'desc')->paginate(5);         
+        // Eager loading
+        $posts = Post::latest()->with(['user', 'dones'])->paginate(5);         
         
         return view('posts.index', [
             'posts' => $posts
@@ -45,4 +46,38 @@ class PostController extends Controller
 
         return back();
     }
-}
+
+    public function destroy(Post $post)
+    {
+        // see: PostPolicy & @can in index.blade.php & Auth provider
+        $this->authorize('delete', $post);
+
+        $post->delete();
+
+        return back();
+    }
+
+    public function edit(Post $post)
+    {
+        return view('posts.edit', ['post'=>$post]);
+    }
+
+    public function update(Request $request, Post $post)
+        {
+            
+            $this->validate($request, [	
+                'body' => 'required'
+            ]);
+            
+            $data = $request->all();
+            
+            $post->fill($data);
+            
+            $post->save();
+            
+            // Redirect to the List of Tasks
+            return redirect()->route('posts');
+
+        }
+
+    }

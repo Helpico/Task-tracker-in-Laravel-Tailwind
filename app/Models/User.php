@@ -46,5 +46,8 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    
+    public function dones()
+    {
+        return $this->hasMany(Done::class);
+    }
 }
