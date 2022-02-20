@@ -49,7 +49,7 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        // see: PostPolicy & @can in index.blade.php & Auth provider
+        // see: PostPolicy & @can in index.blade & in AuthProvider
         $this->authorize('delete', $post);
 
         $post->delete();

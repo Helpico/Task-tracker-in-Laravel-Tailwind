@@ -66,13 +66,13 @@
                         @if (!$post->doneBy(auth()->user()))
                           <form action="{{ route('posts.dones', $post) }}" method="post" class="mr-1">
                               @csrf
-                            <button type="submit" class="text-green-500 text-sm">Completed</button>
+                            <button type="submit" class="text-green-500 text-sm">In progress</button>
                           </form>
                         @else
                           <form action="{{ route('posts.dones', $post) }}" method="post" class="mr-1">
                               @csrf
                               @method('DELETE')
-                              <button type="submit" class="text-red-500 text-sm">In progress</button>
+                              <button type="submit" class="text-red-500 text-sm">Completed</button>
                           </form>
                           
                         @endif

@@ -26,7 +26,7 @@
                         {{ config('app.name', 'LotemX') }}
                     </a>
                     <a href="{{ route('posts') }}" class="text-lg font-semibold text-gray-100 no-underline">
-                        Posts
+                        List
                     </a>
                 </nav>
                 <nav class="space-x-4 text-gray-300 text-sm sm:text-base">
